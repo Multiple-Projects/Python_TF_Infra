@@ -84,6 +84,7 @@ def create_resource(request):
     # Create a temporary directory for this specific resource
     if not os.path.exists(temp_dir):
         os.makedirs(temp_dir)
+        print(f"Created temporary directory: {temp_dir}")
     
     resource_display_name = get_resource_display_name(resource)
     

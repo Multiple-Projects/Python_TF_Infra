@@ -15,6 +15,9 @@ if not temp_dirs:
 print(f"Found {len(temp_dirs)} temporary Terraform directories.")
 
 for temp_dir in temp_dirs:
+    if temp_dir == 'temp_dir':  # Skip our placeholder directory
+        continue
+        
     full_path = os.path.join(base_dir, temp_dir)
     
     # Check if .terraform directory exists and remove it
@@ -29,5 +32,11 @@ for temp_dir in temp_dirs:
         if os.path.exists(file_path):
             print(f"Removing {file_path}...")
             os.remove(file_path)
+    
+    # Keep the main.tf file if it exists
+    main_tf = os.path.join(full_path, 'main.tf')
+    if not os.path.exists(main_tf):
+        print(f"Removing directory {full_path}...")
+        shutil.rmtree(full_path)
 
 print("Cleanup complete!")

@@ -43,6 +43,13 @@ override.tf.json
 terraform.rc
 .terraform.lock.hcl
 
+# Ignore all temporary Terraform directories except .gitkeep files
+aws_manager/terraform/temp_*/*
+!aws_manager/terraform/temp_ec2/.gitkeep
+!aws_manager/terraform/temp_loadbalancer/.gitkeep
+!aws_manager/terraform/temp_s3/.gitkeep
+!aws_manager/terraform/temp_vpc/.gitkeep
+
 # IDE
 .idea/
 .vscode/
