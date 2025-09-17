@@ -72,6 +72,23 @@ A web application built with Django to manage AWS infrastructure using Terraform
   
 - The `.gitignore` file is configured to exclude Terraform state and provider files while maintaining directory structure
 
+## Real-time Console Output
+
+The application provides real-time console output in both the terminal and the web interface:
+
+1. When creating or destroying resources, the Terraform output is:
+   - Displayed in real-time in the terminal where the Django server is running
+   - Captured and sent to the web interface when the operation completes
+
+2. This allows you to:
+   - Monitor progress of resource creation/destruction in real-time in the terminal
+   - View the full output in the web browser when the operation is complete
+
+3. Terraform operations that are shown:
+   - `terraform init` - Initialization
+   - `terraform plan` - Planning changes
+   - `terraform apply`/`terraform destroy` - Applying or destroying resources
+
 ## Technologies Used
 
 - Django 5.2.5

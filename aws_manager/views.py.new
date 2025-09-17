@@ -312,4 +312,3 @@ def destroy_resource(request):
             'resource_name': resource_display_name, 
             'status': 'Error during destruction'
         })
-
