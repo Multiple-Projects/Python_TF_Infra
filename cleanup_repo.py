@@ -29,7 +29,7 @@ def ensure_temp_dirs():
             os.makedirs(temp_dir)
             print(f"Created directory: {temp_dir}")
         
-        # Clean the directory except for .gitkeep
+        # Remove everything from the directory
         for item in os.listdir(temp_dir):
             item_path = os.path.join(temp_dir, item)
             if item != '.gitkeep':
@@ -40,12 +40,43 @@ def ensure_temp_dirs():
                     shutil.rmtree(item_path)
                     print(f"Removed directory: {item_path}")
         
+        # Check for any .terraform directories in the parent directory
+        terraform_dir = os.path.join(temp_dir, '.terraform')
+        if os.path.exists(terraform_dir):
+            shutil.rmtree(terraform_dir)
+            print(f"Removed Terraform directory: {terraform_dir}")
+        
         # Ensure .gitkeep exists
         gitkeep_path = os.path.join(temp_dir, '.gitkeep')
         if not os.path.exists(gitkeep_path):
             with open(gitkeep_path, 'w') as f:
                 pass  # Create empty file
             print(f"Created .gitkeep file in {temp_dir}")
+
+def clean_terraform_artifacts():
+    """
+    Clean up all Terraform artifacts from the repository
+    """
+    print("Cleaning Terraform artifacts from the repository...")
+    
+    # Walk through all directories in the repository
+    for root, dirs, files in os.walk(SCRIPT_DIR):
+        # Skip .git directory
+        if '.git' in dirs:
+            dirs.remove('.git')
+        
+        # Remove Terraform state files
+        for file in files:
+            if file.endswith('.tfstate') or file.endswith('.tfstate.backup') or file == '.terraform.lock.hcl':
+                file_path = os.path.join(root, file)
+                os.remove(file_path)
+                print(f"Removed Terraform state file: {file_path}")
+        
+        # Remove .terraform directories
+        if '.terraform' in dirs:
+            terraform_dir = os.path.join(root, '.terraform')
+            shutil.rmtree(terraform_dir)
+            print(f"Removed Terraform directory: {terraform_dir}")
 
 def main():
     """
@@ -60,6 +91,9 @@ def main():
     
     # Setup the temporary directories
     ensure_temp_dirs()
+    
+    # Clean up Terraform artifacts
+    clean_terraform_artifacts()
     
     print("Repository cleanup completed successfully!")
     return 0
