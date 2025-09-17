@@ -149,24 +149,60 @@ def create_resource(request):
         # Inform user that creation is in progress
         creation_message = f"{resource_display_name} is getting created..."
         
-        # Run terraform init and apply in the temp directory
-        init_result = subprocess.run(['terraform', 'init'], cwd=temp_dir, capture_output=True, text=True)
+        # Run terraform commands with real-time output
+        combined_output = "Initializing Terraform...\n"
+        print("Initializing Terraform...")
         
-        # Add the init output to our combined output
-        combined_output = f"Initializing Terraform...\n{init_result.stdout}\n\n"
+        # Run terraform init with real-time output
+        init_process = subprocess.Popen(['terraform', 'init'], 
+                                       cwd=temp_dir, 
+                                       stdout=subprocess.PIPE, 
+                                       stderr=subprocess.STDOUT,
+                                       universal_newlines=True)
         
-        # First run terraform plan to show what will be created
-        plan_result = subprocess.run(['terraform', 'plan'], 
-                                   cwd=temp_dir, capture_output=True, text=True)
-        combined_output += f"Planning resource creation...\n{plan_result.stdout}\n\n"
+        # Process and capture real-time output
+        for line in init_process.stdout:
+            combined_output += line
+            print(line, end='', flush=True)
+            
+        init_process.wait()
         
-        # Then run terraform apply to create the resources
-        result = subprocess.run(['terraform', 'apply', '-auto-approve'], 
-                                cwd=temp_dir, capture_output=True, text=True)
+        # Run terraform plan with real-time output
+        combined_output += "\n\nPlanning resource creation...\n"
+        print("\nPlanning resource creation...")
         
-        combined_output += f"Applying Terraform configuration...\n{result.stdout}"
+        plan_process = subprocess.Popen(['terraform', 'plan'], 
+                                       cwd=temp_dir, 
+                                       stdout=subprocess.PIPE, 
+                                       stderr=subprocess.STDOUT,
+                                       universal_newlines=True)
         
-        if result.returncode == 0:
+        # Process and capture real-time output
+        for line in plan_process.stdout:
+            combined_output += line
+            print(line, end='', flush=True)
+            
+        plan_process.wait()
+        
+        # Run terraform apply with real-time output
+        combined_output += "\n\nApplying Terraform configuration...\n"
+        print("\nApplying Terraform configuration...")
+        
+        result_process = subprocess.Popen(['terraform', 'apply', '-auto-approve'], 
+                                        cwd=temp_dir, 
+                                        stdout=subprocess.PIPE, 
+                                        stderr=subprocess.STDOUT,
+                                        universal_newlines=True)
+        
+        # Process and capture real-time output
+        for line in result_process.stdout:
+            combined_output += line
+            print(line, end='', flush=True)
+            
+        # Store the return code for checking if the command was successful
+        return_code = result_process.wait()
+        
+        if return_code == 0:
             return JsonResponse({
                 'success': True, 
                 'message': f'{resource_display_name} successfully created!', 
@@ -175,7 +211,8 @@ def create_resource(request):
                 'status': f"{resource_display_name} successfully created!"
             })
         else:
-            error_output = combined_output + f"\n\nERROR:\n{result.stderr}"
+            # For failed commands, we've already captured the error output in combined_output
+            error_output = combined_output + "\n\nERROR: Terraform command failed"
             return JsonResponse({
                 'success': False, 
                 'message': 'Error creating resource', 
@@ -215,18 +252,42 @@ def destroy_resource(request):
         # Inform user that destruction is in progress
         destruction_message = f"{resource_display_name} is being destroyed..."
         
-        # First run terraform plan to show what will be destroyed
-        plan_result = subprocess.run(['terraform', 'plan', '-destroy'], 
-                                   cwd=temp_dir, capture_output=True, text=True)
-        combined_output = f"Planning resource destruction...\n{plan_result.stdout}\n\n"
+        # Run terraform plan with real-time output
+        combined_output = "Planning resource destruction...\n"
+        print("Planning resource destruction...")
         
-        # Run terraform destroy in the temp directory
-        result = subprocess.run(['terraform', 'destroy', '-auto-approve'], 
-                               cwd=temp_dir, capture_output=True, text=True)
+        plan_process = subprocess.Popen(['terraform', 'plan', '-destroy'], 
+                                       cwd=temp_dir, 
+                                       stdout=subprocess.PIPE, 
+                                       stderr=subprocess.STDOUT,
+                                       universal_newlines=True)
         
-        combined_output += f"Destroying resources...\n{result.stdout}"
+        # Process and capture real-time output
+        for line in plan_process.stdout:
+            combined_output += line
+            print(line, end='', flush=True)
+            
+        plan_process.wait()
         
-        if result.returncode == 0:
+        # Run terraform destroy with real-time output
+        combined_output += "\n\nDestroying resources...\n"
+        print("\nDestroying resources...")
+        
+        destroy_process = subprocess.Popen(['terraform', 'destroy', '-auto-approve'], 
+                                         cwd=temp_dir, 
+                                         stdout=subprocess.PIPE, 
+                                         stderr=subprocess.STDOUT,
+                                         universal_newlines=True)
+        
+        # Process and capture real-time output
+        for line in destroy_process.stdout:
+            combined_output += line
+            print(line, end='', flush=True)
+            
+        # Store the return code for checking if the command was successful
+        return_code = destroy_process.wait()
+        
+        if return_code == 0:
             return JsonResponse({
                 'success': True, 
                 'message': f'{resource_display_name} successfully destroyed!', 
@@ -235,7 +296,8 @@ def destroy_resource(request):
                 'status': f"{resource_display_name} successfully destroyed!"
             })
         else:
-            error_output = combined_output + f"\n\nERROR:\n{result.stderr}"
+            # For failed commands, we've already captured the error output in combined_output
+            error_output = combined_output + "\n\nERROR: Terraform command failed"
             return JsonResponse({
                 'success': False, 
                 'message': 'Error destroying resource', 

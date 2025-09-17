@@ -12,10 +12,35 @@ A web application built with Django to manage AWS infrastructure using Terraform
 
 ## Setup
 
+### Automatic Setup
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/Multiple-Projects/Python_TF_Infra.git
+   cd Python_TF_Infra
+   ```
+
+2. Run the setup script:
+   - On Linux/Mac: `./setup.sh`
+   - On Windows: `setup.bat`
+
+3. Configure AWS credentials:
+   ```
+   aws configure
+   ```
+
+4. Run the Django server:
+   ```
+   python manage.py runserver
+   ```
+
+### Manual Setup
+
 1. Clone the repository
-2. Install dependencies: `pip install -r requirements.txt`
-3. Configure AWS credentials: `aws configure`
-4. Run the Django server: `python manage.py runserver`
+2. Run `python cleanup_repo.py` to set up directory structure
+3. Install dependencies: `pip install -r requirements.txt`
+4. Configure AWS credentials: `aws configure`
+5. Run the Django server: `python manage.py runserver`
 
 ## Project Structure
 
