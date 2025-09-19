@@ -37,6 +37,6 @@ resource "aws_instance" "ec2_instance" {
   subnet_id              = data.aws_subnets.default_subnets.ids[0]
   vpc_security_group_ids = [data.aws_security_group.default_sg.id]
   tags = {
-    Name = "DjangoEC2Instance"
+    Name = "__NAME__"
   }
 }

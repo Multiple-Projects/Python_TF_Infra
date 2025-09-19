@@ -12,7 +12,7 @@ provider "aws" {
 }
 
 resource "aws_lb" "example" {
-  name               = "django-lb"
+  name               = "__NAME__"
   internal           = false
   load_balancer_type = "application"
   subnets            = ["subnet-xxxxxx"] # Replace with your subnet IDs
