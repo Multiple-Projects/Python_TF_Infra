@@ -82,6 +82,25 @@
             display: flex;
             gap: 10px;
             margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .reset-btn {
+            background-color: #ffe58f;
+            color: #8B6C00;
+            border: 1px solid #FFD666;
+            margin-top: 5px;
+            font-size: 0.85rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .reset-btn:hover {
+            background-color: #FFD666;
         }
             padding: 32px 0 24px 0;
             border-radius: 12px;
@@ -128,6 +147,53 @@
         button.destroy:hover:not(:disabled) {
             background-color: #dc2626;
         }
+        .confirmation-buttons {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .confirmation-message {
+            margin-bottom: 12px;
+        }
+        .confirmation-message strong {
+            color: #2d3748;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .confirmation-message p {
+            margin: 6px 0;
+            color: #4a5568;
+        }
+        .confirm-btn {
+            background-color: #10b981;
+            color: white;
+        }
+        .confirm-btn:hover:not(:disabled) {
+            background-color: #059669;
+        }
+        .cancel-btn {
+            background-color: #64748b;
+            color: white;
+        }
+        .cancel-btn:hover:not(:disabled) {
+            background-color: #475569;
+        }
+        .confirmation-processing {
+            background-color: #f0f9ff;
+            color: #3b82f6;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 3px solid #3b82f6;
+        }
+        .error-message {
+            background-color: #fef2f2;
+            color: #ef4444;
+            padding: 10px;
+            margin: 8px 0;
+            border-left: 3px solid #ef4444;
+        }
         .resource-title {
             font-weight: 500;
             margin-bottom: 15px;
@@ -151,6 +217,8 @@
             border-radius: 4px;
             font-family: 'Consolas', 'Monaco', monospace;
             font-size: 0.85rem;
+            line-height: 1.4;
+            overflow-x: auto;
             overflow-x: auto;
             white-space: pre-wrap;
             word-wrap: break-word;
@@ -195,9 +263,104 @@
             display: block;
             margin-top: 8px;
         }
+        .tf-section {
+            color: #4299e1;
+            font-weight: bold;
+            display: block;
+            margin-top: 8px;
+        }
+        .tf-resource-id {
+            color: #9f7aea;
+            font-weight: 500;
+        }
+        .tf-output-key {
+            color: #38b2ac;
+            font-weight: bold;
+        }
+        .tf-output-value {
+            color: #f6ad55;
+        }
+        .tf-confirm {
+            color: #38b2ac;
+            font-weight: bold;
+            font-size: 1.05em;
+            display: block;
+            margin: 10px 0;
+            padding: 5px 0;
+            border-top: 1px dotted #718096;
+            border-bottom: 1px dotted #718096;
+        }
         /* Fix the line breaks and spacing in pre */
         pre {
             white-space: pre-wrap;
+        }
+        
+        /* Console control panel */
+        .console-controls {
+            display: flex;
+            justify-content: flex-end;
+            background: #2d3748;
+            border-radius: 4px 4px 0 0;
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+        
+        .console-controls button {
+            background: none;
+            border: 1px solid #4a5568;
+            color: #e2e8f0;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            min-width: auto;
+            margin-left: 5px;
+            border-radius: 3px;
+        }
+        
+        .console-controls button:hover {
+            background: #4a5568;
+        }
+        
+        .console-controls button.active {
+            background: #4299e1;
+            border-color: #4299e1;
+        }
+
+        /* Streaming output specific styles */
+        .streaming-output {
+            background: #1a202c;
+            color: #e2e8f0;
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 400px;
+            border-radius: 0 0 4px 4px;
+        }
+        
+        /* Terraform output formatting */
+        .tf-action-header { color: #60a5fa; font-weight: bold; }
+        .tf-section { color: #c084fc; font-weight: bold; }
+        .tf-resource { color: #34d399; font-weight: bold; }
+        .tf-resource-id { color: #a78bfa; }
+        .tf-success { color: #10b981; font-weight: bold; }
+        .tf-error { color: #ef4444; font-weight: bold; }
+        .tf-plan { color: #f59e0b; font-weight: bold; }
+        .tf-output-key { color: #60a5fa; }
+        .tf-output-value { color: #f59e0b; }
+        .tf-\+ { color: #10b981; font-weight: bold; }  /* create */
+        .tf-\- { color: #ef4444; font-weight: bold; }  /* destroy */
+        .tf-\~ { color: #f59e0b; font-weight: bold; }  /* modify */
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 10px 0;
+            line-height: 1.4;
+            border: 1px solid #2d3748;
+            max-height: 400px;
+            overflow-y: auto;
+        }
             line-height: 1.5;
             padding: 15px;
             margin-top: 12px;
@@ -382,6 +545,10 @@
                         <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/><path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/></svg>
                         Destroy
                     </button>
+                    <button class="reset-btn" id="reset-ec2" onclick="resetResource('ec2')">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 4px;"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+                        Reset State
+                    </button>
                 </div>
                 <div class="notify" id="notify-ec2" style="display:none;"></div>
             </div>
@@ -456,6 +623,32 @@
         function formatTerraformOutput(output) {
             if (!output) return '';
             
+            // Check if the output already contains HTML span tags for Terraform formatting
+            const containsHtmlFormatting = /<span class="tf-.*?">/.test(output);
+            
+            if (containsHtmlFormatting) {
+                // If output already has HTML formatting, just ensure newlines are converted to <br>
+                // and special characters are properly handled
+                return output
+                    // Convert Unicode box-drawing characters to HTML entities if they aren't already
+                    .replace(/─/g, '&#9472;')
+                    .replace(/│/g, '&#9474;')
+                    .replace(/┌/g, '&#9484;')
+                    .replace(/┐/g, '&#9488;')
+                    .replace(/└/g, '&#9492;')
+                    .replace(/┘/g, '&#9496;')
+                    .replace(/├/g, '&#9500;')
+                    .replace(/┤/g, '&#9508;')
+                    .replace(/┬/g, '&#9516;')
+                    .replace(/┴/g, '&#9524;')
+                    .replace(/┼/g, '&#9532;')
+                    // Fix encoding issues for special characters
+                    .replace(/â"€/g, '&#9472;') // horizontal line
+                    .replace(/â"‚/g, '&#9474;') // vertical line
+                    // Replace newlines with <br> if not already done
+                    .replace(/\n/g, '<br>');
+            }
+            
             // First, escape any HTML to prevent XSS
             output = output
                 .replace(/&/g, '&amp;')
@@ -463,6 +656,24 @@
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#039;');
+            
+            // Fix common display issues in terminal output
+            output = output
+                // Convert Unicode box-drawing characters to HTML entities
+                .replace(/─/g, '&#9472;')
+                .replace(/│/g, '&#9474;')
+                .replace(/┌/g, '&#9484;')
+                .replace(/┐/g, '&#9488;')
+                .replace(/└/g, '&#9492;')
+                .replace(/┘/g, '&#9496;')
+                .replace(/├/g, '&#9500;')
+                .replace(/┤/g, '&#9508;')
+                .replace(/┬/g, '&#9516;')
+                .replace(/┴/g, '&#9524;')
+                .replace(/┼/g, '&#9532;')
+                // Fix encoding issues for special characters
+                .replace(/â"€/g, '&#9472;') // horizontal line
+                .replace(/â"‚/g, '&#9474;'); // vertical line
             
             // Highlight important sections - replace after escaping
             let formatted = output
@@ -474,8 +685,21 @@
                 .replace(/(Apply complete!)/g, '<span class="tf-success">$1</span>')
                 .replace(/(Destroy complete!)/g, '<span class="tf-success">$1</span>')
                 .replace(/(Plan:.*)/g, '<span class="tf-plan">$1</span>')
+                // Highlight command sections
+                .replace(/(Initializing provider plugins\.\.\.)/g, '<span class="tf-section">$1</span>')
+                .replace(/(Initializing\.\.\.)/g, '<span class="tf-section">$1</span>')
+                .replace(/(Planning\.\.\.)/g, '<span class="tf-section">$1</span>')
+                .replace(/(Applying\.\.\.)/g, '<span class="tf-section">$1</span>')
+                .replace(/(Destroying\.\.\.)/g, '<span class="tf-section">$1</span>')
+                // Highlight resource identifiers like aws_instance.example
+                .replace(/(\s|^)([a-z0-9_]+\.[a-z0-9_]+)(\s|$|\.)/g, '$1<span class="tf-resource-id">$2</span>$3')
+                // Highlight output values
+                .replace(/(Outputs:)/g, '<span class="tf-section">$1</span>')
+                .replace(/(\s+)([a-z0-9_]+) = (.*)/g, '$1<span class="tf-output-key">$2</span> = <span class="tf-output-value">$3</span>')
                 // Highlight errors
                 .replace(/(Error:.*)/g, '<span class="tf-error">$1</span>')
+                // Highlight confirmation message
+                .replace(/(Plan complete\. Review the resources above and confirm (?:creation|destruction)\.)/g, '<span class="tf-confirm">$1</span>')
                 // Replace newlines with <br> for better display
                 .replace(/\n/g, '<br>');
             
@@ -484,11 +708,11 @@
         
         // Initialize resource states from server data
         const resourceStates = {
-            'ec2': {% if resources_state.ec2 %}true{% else %}false{% endif %},
-            's3': {% if resources_state.s3 %}true{% else %}false{% endif %},
-            'loadbalancer': {% if resources_state.loadbalancer %}true{% else %}false{% endif %},
-            'vpc': {% if resources_state.vpc %}true{% else %}false{% endif %},
-            'asg_with_ec2': {% if resources_state.asg_with_ec2 %}true{% else %}false{% endif %}
+            'ec2': {% if resources_status.ec2 %}true{% else %}false{% endif %},
+            's3': {% if resources_status.s3 %}true{% else %}false{% endif %},
+            'loadbalancer': {% if resources_status.loadbalancer %}true{% else %}false{% endif %},
+            'vpc': {% if resources_status.vpc %}true{% else %}false{% endif %},
+            'asg_with_ec2': {% if resources_status.asg_with_ec2 %}true{% else %}false{% endif %}
         };
         
         // Show destroy buttons for resources that exist on page load
@@ -565,9 +789,15 @@
         }
         
         function createResourceWithConfig(resource) {
+            // Debug logging
+            console.log("Creating resource:", resource);
+            
             // Get values from form
             const resourceName = document.getElementById('resourceName').value.trim();
             const resourceCount = document.getElementById('resourceCount').value;
+            
+            console.log("Resource name:", resourceName);
+            console.log("Resource count:", resourceCount);
             
             // Validate input
             if (!resourceName) {
@@ -594,20 +824,6 @@
             };
             let displayName = resourceNames[resource] || resource;
             
-            // Ask for final confirmation
-            let confirmMessage = `Are you sure you want to create ${resourceName}`;
-            
-            // Add count to confirmation if applicable
-            if ((resource === 'ec2' || resource === 's3') && resourceCount > 1) {
-                confirmMessage += ` (${resourceCount} instances)`;
-            }
-            
-            if (!confirm(confirmMessage + '?')) {
-                // Re-enable create button if user cancels
-                document.getElementById('create-' + resource).disabled = false;
-                return;
-            }
-            
             // Proceed with creation
             // Use the display name from above
             // (removed duplicate declaration of resourceNames)
@@ -622,6 +838,22 @@
                 notifyDiv.innerHTML = `<strong>Status:</strong> ${displayName} is getting created...`;
             }
             
+            // Show real-time output container immediately
+            if (notifyDiv) {
+                notifyDiv.className = 'notify';
+                notifyDiv.innerHTML = `
+                    <div class="output-header">
+                        <strong>Creating ${displayName}...</strong>
+                    </div>
+                    <pre class="streaming-output">Initializing Terraform...</pre>
+                `;
+            }
+            
+            // Start background polling for terminal output
+            pollTerminalOutput(resource);
+            
+            console.log("Creating resource:", resource, resourceName, resourceCount);
+            
             fetch('/create_resource/', {
                 method: 'POST',
                 headers: {
@@ -630,39 +862,25 @@
                 },
                 body: `resource=${resource}&name=${encodeURIComponent(resourceName)}&count=${resourceCount}`
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log("Create response status:", response.status);
+                return response.json();
+            })
             .then(data => {
-                if (notifyDiv) {
-                    // Update UI based on response
-                    if (data.success) {
-                        // Format Terraform output for better readability
-                        const formattedOutput = formatTerraformOutput(data.output);
-                        
-                        notifyDiv.className = 'notify success';
-                        notifyDiv.innerHTML = `
-                            <div class="output-header">
-                                <strong>${data.message}</strong>
-                                <span>Resource: ${data.resource_name}</span>
-                            </div>
-                            <pre>${formattedOutput}</pre>
-                        `;
-                        
-                        // Show destroy button when resource is created successfully
-                        resourceStates[resource] = true;
-                        document.getElementById('destroy-' + resource).style.display = 'inline-flex';
-                    } else {
+                if (!data.success) {
+                    const notifyDiv = document.getElementById('notify-' + resource);
+                    if (notifyDiv) {
                         notifyDiv.className = 'notify error';
                         notifyDiv.innerHTML = `
                             <div class="output-header">
                                 <strong>Error: ${data.message}</strong>
                                 <span>Resource: ${data.resource_name}</span>
                             </div>
-                            <pre>${data.output || ''}</pre>
+                            <pre>Failed to start resource creation process.</pre>
                         `;
+                        // Re-enable create button
+                        document.getElementById('create-' + resource).disabled = false;
                     }
-                    
-                    // Re-enable create button
-                    document.getElementById('create-' + resource).disabled = false;
                 }
             })
             .catch(error => {
@@ -690,11 +908,6 @@
             };
             let displayName = resourceNames[resource] || resource;
             
-            // Show confirmation dialog
-            if (!confirm(`Are you sure you want to destroy this ${displayName}? This action cannot be undone.`)) {
-                return; // User canceled
-            }
-            
             // Disable destroy button during operation
             document.getElementById('destroy-' + resource).disabled = true;
             
@@ -705,6 +918,21 @@
                 notifyDiv.innerHTML = `<strong>Status:</strong> ${displayName} is being destroyed...`;
             }
             
+            // Show real-time output container immediately
+            if (notifyDiv) {
+                notifyDiv.className = 'notify';
+                notifyDiv.innerHTML = `
+                    <div class="output-header">
+                        <strong>Destroying ${displayName}...</strong>
+                    </div>
+                    <pre class="streaming-output">Planning resource destruction...</pre>
+                `;
+            }
+            
+            // Start background polling for terminal output
+            pollTerminalOutput(resource);
+            
+            console.log("Destroying resource:", resource);
             fetch('/destroy_resource/', {
                 method: 'POST',
                 headers: {
@@ -713,39 +941,23 @@
                 },
                 body: 'resource=' + resource
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log("Destroy response status:", response.status);
+                return response.json();
+            })
             .then(data => {
-                if (notifyDiv) {
-                    // Update UI based on response
-                    if (data.success) {
-                        // Format Terraform output for better readability
-                        const formattedOutput = formatTerraformOutput(data.output);
-                        
-                        notifyDiv.className = 'notify success';
-                        notifyDiv.innerHTML = `
-                            <div class="output-header">
-                                <strong>${data.message}</strong>
-                                <span>Resource: ${data.resource_name}</span>
-                            </div>
-                            <pre>${formattedOutput}</pre>
-                        `;
-                        
-                        // Hide destroy button when resource is destroyed successfully
-                        resourceStates[resource] = false;
-                        document.getElementById('destroy-' + resource).style.display = 'none';
-                    } else {
+                if (!data.success) {
+                    const notifyDiv = document.getElementById('notify-' + resource);
+                    if (notifyDiv) {
                         notifyDiv.className = 'notify error';
                         notifyDiv.innerHTML = `
                             <div class="output-header">
                                 <strong>Error: ${data.message}</strong>
                                 <span>Resource: ${data.resource_name}</span>
                             </div>
-                            <pre>${data.output || ''}</pre>
+                            <pre>Failed to start resource destruction process.</pre>
                         `;
-                    }
-                    
-                    // Re-enable destroy button if it's still needed
-                    if (resourceStates[resource]) {
+                        // Re-enable destroy button
                         document.getElementById('destroy-' + resource).disabled = false;
                     }
                 }
@@ -764,6 +976,400 @@
                 }
             });
         }
+        // Global object was already defined at the top of the script
+        
+        // Function for real-time terminal output polling
+        function pollTerminalOutput(resource, initialDelay = 500) {
+            // Resource display names
+            let resourceNames = {
+                'ec2': 'EC2 Instance',
+                's3': 'S3 Bucket',
+                'loadbalancer': 'Load Balancer',
+                'vpc': 'VPC',
+                'asg_with_ec2': 'ASG with EC2',
+            };
+            
+            // Wait a bit before starting to poll
+            setTimeout(() => {
+                const notifyDiv = document.getElementById('notify-' + resource);
+                if (!notifyDiv) return;
+                
+                // Set up polling interval
+                const pollInterval = setInterval(() => {
+                    fetch('/get_terminal_output/?resource=' + resource)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.output) {
+                                // Format Terraform output for better readability
+                                const formattedOutput = formatTerraformOutput(data.output);
+                                
+                                // Store if we already have a confirmation UI
+                                const hasConfirmationUI = document.getElementById('confirmation-buttons-' + resource) !== null;
+                                
+                                // Determine if we're creating or destroying based on output content and context
+                                // We need to be more precise because Terraform plans often include words like "destroy" in property descriptions
+                                let isDestroy = false;
+                                
+                                // Check which button is disabled - this is the most reliable indicator
+                                if (document.getElementById('destroy-' + resource).disabled === true && 
+                                    document.getElementById('create-' + resource).disabled === false) {
+                                    isDestroy = true;
+                                } else if (document.getElementById('create-' + resource).disabled === true &&
+                                         document.getElementById('destroy-' + resource).disabled === false) {
+                                    isDestroy = false;
+                                } else {
+                                    // Fallback to analyzing the output text
+                                    // Look for phrases that strongly indicate destruction
+                                    isDestroy = (
+                                        data.output.toLowerCase().includes('terraform will destroy') ||
+                                        data.output.toLowerCase().includes('destroying...') ||
+                                        data.output.toLowerCase().includes('destroy complete') ||
+                                        data.output.match(/plan: 0 to add, 0 to change, \d+ to destroy/i) !== null
+                                    );
+                                }
+                                const action = isDestroy ? 'destroy' : 'create';
+                                console.log(`Action determined for ${resource}: ${action}`);
+                                
+                                // Get the auto-scroll state if it exists
+                                const autoScrollId = 'auto-scroll-' + resource;
+                                let autoScroll = true;
+                                if (window[autoScrollId] !== undefined) {
+                                    autoScroll = window[autoScrollId];
+                                } else {
+                                    // Set default state
+                                    window[autoScrollId] = autoScroll;
+                                }
+                                
+                                if (!hasConfirmationUI || !data.waiting_confirmation) {
+                                    // Create base output HTML
+                                    let outputHTML = `
+                                        <div class="output-header">
+                                            <strong>${data.waiting_confirmation ? 'Waiting for confirmation...' : 'Operation in progress...'}</strong>
+                                            <span>Resource: ${resourceNames[resource] || resource}</span>
+                                        </div>
+                                        <div class="console-controls">
+                                            <button id="autoscroll-btn-${resource}" class="${autoScroll ? 'active' : ''}">
+                                                ${autoScroll ? 'Auto-Scroll ON' : 'Auto-Scroll OFF'}
+                                            </button>
+                                            <button id="clear-btn-${resource}">Clear</button>
+                                        </div>
+                                        <pre class="streaming-output">${formattedOutput}</pre>
+                                    `;
+                                    
+                                    // Update the notification div with live output
+                                    notifyDiv.innerHTML = outputHTML;
+                                    
+                                    // Add scroll event listener to automatically disable auto-scroll when user scrolls manually
+                                    const preElement = notifyDiv.querySelector('pre');
+                                    if (preElement) {
+                                        preElement.addEventListener('scroll', function() {
+                                            // If user has scrolled up (not at bottom), disable auto-scroll
+                                            if (this.scrollHeight - this.scrollTop - this.clientHeight > 50) {
+                                                if (window[autoScrollId]) {
+                                                    window[autoScrollId] = false;
+                                                    const btn = document.getElementById(`autoscroll-btn-${resource}`);
+                                                    if (btn) {
+                                                        btn.classList.remove('active');
+                                                        btn.textContent = 'Auto-Scroll OFF';
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+                                    
+                                    // Add event listeners for the control buttons
+                                    document.getElementById(`autoscroll-btn-${resource}`).addEventListener('click', function() {
+                                        window[autoScrollId] = !window[autoScrollId];
+                                        this.classList.toggle('active');
+                                        this.textContent = window[autoScrollId] ? 'Auto-Scroll ON' : 'Auto-Scroll OFF';
+                                    });
+                                    
+                                    document.getElementById(`clear-btn-${resource}`).addEventListener('click', function() {
+                                        const pre = notifyDiv.querySelector('pre');
+                                        if (pre) pre.textContent = '';
+                                    });
+                                } else {
+                                    // If we have a confirmation UI and are waiting for confirmation, just update the pre element content
+                                    const pre = notifyDiv.querySelector('pre');
+                                    if (pre) {
+                                        // Use innerHTML instead of textContent to correctly render HTML formatting
+                                        pre.innerHTML = formattedOutput;
+                                    }
+                                }
+                                
+                                // Get the pre element for scrolling
+                                const pre = notifyDiv.querySelector('pre');
+                                
+                                // Only auto-scroll if enabled and not manually scrolled
+                                if (pre && autoScroll) {
+                                    pre.scrollTop = pre.scrollHeight;
+                                }
+                                
+                                // If waiting for confirmation, add confirmation buttons
+                                if (data.waiting_confirmation && !hasConfirmationUI) {
+                                    // Create confirmation UI only if it doesn't already exist
+                                    const confirmationUI = document.createElement('div');
+                                    confirmationUI.id = 'confirmation-buttons-' + resource;
+                                    confirmationUI.className = 'confirmation-buttons';
+                                    confirmationUI.innerHTML = `
+                                        <div class="confirmation-message">
+                                            <strong>Review the Terraform plan above:</strong>
+                                            <p>${action === 'destroy' ? 'Do you want to destroy these resources?' : 'Do you want to apply these changes?'}</p>
+                                        </div>
+                                        <div class="button-container">
+                                            <button class="confirm-btn" id="confirm-btn-${resource}">
+                                                ${action === 'destroy' ? 'Yes, Destroy Resources' : 'Yes, Apply Changes'}
+                                            </button>
+                                            <button class="cancel-btn" id="cancel-btn-${resource}">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    `;
+                                    
+                                    // Append to notification div
+                                    notifyDiv.appendChild(confirmationUI);
+                                    
+                                    // Add event listeners (only when we create the UI)
+                                    document.getElementById(`confirm-btn-${resource}`).addEventListener('click', function() {
+                                        confirmResource(resource, action);
+                                    });
+                                    
+                                    document.getElementById(`cancel-btn-${resource}`).addEventListener('click', function() {
+                                        // Re-enable create/destroy buttons
+                                        document.getElementById('create-' + resource).disabled = false;
+                                        const destroyBtn = document.getElementById('destroy-' + resource);
+                                        if (destroyBtn) destroyBtn.disabled = false;
+                                        
+                                        // Remove the confirmation UI completely instead of just hiding it
+                                        const confirmationUI = document.getElementById('confirmation-buttons-' + resource);
+                                        if (confirmationUI) confirmationUI.remove();
+                                        
+                                        // Reset the waiting_confirmation status
+                                        fetch('/cancel_operation/', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/x-www-form-urlencoded',
+                                                'X-CSRFToken': getCookie('csrftoken')
+                                            },
+                                            body: `resource=${resource}`
+                                        });
+                                        
+                                        // Hide the notification div or show a cancellation message
+                                        const notifyDiv = document.getElementById('notify-' + resource);
+                                        if (notifyDiv) {
+                                            notifyDiv.innerHTML = `
+                                                <div class="output-header">
+                                                    <strong>Operation Cancelled</strong>
+                                                    <span>Resource: ${resourceNames[resource] || resource}</span>
+                                                </div>
+                                                <div class="confirmation-message">
+                                                    <p>The operation was cancelled. You can try again if needed.</p>
+                                                </div>
+                                            `;
+                                        }
+                                    });
+                                }
+                                
+                                // If operation is complete, update UI and stop polling
+                                if (data.complete) {
+                                    clearInterval(pollInterval);
+                                    
+                                    // Remove confirmation buttons if they exist
+                                    const confirmationButtons = document.getElementById('confirmation-buttons-' + resource);
+                                    if (confirmationButtons) {
+                                        confirmationButtons.style.display = 'none';
+                                    }
+                                    
+                                    if (data.success) {
+                                        notifyDiv.className = 'notify success';
+                                        document.getElementById('create-' + resource).disabled = false;
+                                        
+                                        // Show destroy button when resource is created successfully
+                                        if (resource && !notifyDiv.innerHTML.includes('destruction')) {
+                                            resourceStates[resource] = true;
+                                            document.getElementById('destroy-' + resource).style.display = 'inline-flex';
+                                        } else {
+                                            // Hide destroy button when resource is destroyed successfully
+                                            resourceStates[resource] = false;
+                                            document.getElementById('destroy-' + resource).style.display = 'none';
+                                        }
+                                    } else {
+                                        notifyDiv.className = 'notify error';
+                                        document.getElementById('create-' + resource).disabled = false;
+                                        document.getElementById('destroy-' + resource).disabled = false;
+                                    }
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error polling terminal output:', error);
+                        });
+                }, 1000); // Poll every 1 second
+            }, initialDelay);
+        }
+        
+        // Function to handle resource confirmation
+        function confirmResource(resource, action) {
+            console.log(`Confirming ${action} for resource: ${resource}`);
+            const notifyDiv = document.getElementById('notify-' + resource);
+            
+            // Double-check action based on which button is disabled
+            const destroyBtnDisabled = document.getElementById('destroy-' + resource).disabled;
+            const createBtnDisabled = document.getElementById('create-' + resource).disabled;
+            
+            // More reliable way to determine the action
+            if (createBtnDisabled && !destroyBtnDisabled) {
+                console.log(`Create button is disabled while destroy is not - this is a create operation`);
+                action = 'create';
+            } else if (!createBtnDisabled && destroyBtnDisabled) {
+                console.log(`Destroy button is disabled while create is not - this is a destroy operation`);
+                action = 'destroy';
+            } else {
+                console.log(`Both buttons have same disabled state - using provided action: ${action}`);
+            }
+            
+            // Log the final action decision
+            console.log(`Final action for confirmation: ${action}`);
+            
+            // Hide confirmation buttons
+            const confirmationButtons = document.getElementById('confirmation-buttons-' + resource);
+            if (confirmationButtons) {
+                confirmationButtons.remove(); // Remove rather than just hide
+            }
+            
+            // Add processing message
+            const processingDiv = document.createElement('div');
+            processingDiv.className = 'confirmation-processing';
+            processingDiv.textContent = 'Processing confirmation...';
+            notifyDiv.appendChild(processingDiv);
+            
+            // Send confirmation to server
+            fetch('/confirm_resource/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: `resource=${resource}&action=${action}`
+            })
+            .then(response => {
+                console.log("Confirmation response status:", response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log("Confirmation response data:", data);
+                
+                if (!data.success) {
+                    // If confirmation failed, show error
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'error-message';
+                    errorDiv.textContent = `Confirmation failed: ${data.message}`;
+                    notifyDiv.appendChild(errorDiv);
+                    
+                    // Re-enable buttons
+                    document.getElementById('create-' + resource).disabled = false;
+                    const destroyBtn = document.getElementById('destroy-' + resource);
+                    if (destroyBtn) destroyBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error confirming resource:', error);
+                
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.textContent = `Confirmation error: ${error.message}`;
+                notifyDiv.appendChild(errorDiv);
+                
+                // Re-enable buttons on error
+                document.getElementById('create-' + resource).disabled = false;
+                const destroyBtn = document.getElementById('destroy-' + resource);
+                if (destroyBtn) destroyBtn.disabled = false;
+            });
+        }
+        
+        // We're using the pollTerminalOutput function which handles its own polling lifecycle
+        
+        // Function to reset resource state (remove Terraform files)
+        function resetResource(resource) {
+            if (!confirm("Are you sure you want to reset the state for this resource? This will delete all Terraform state files and allow you to start fresh.")) {
+                return;
+            }
+            
+            let resourceNames = {
+                'ec2': 'EC2 Instance',
+                's3': 'S3 Bucket',
+                'loadbalancer': 'Load Balancer',
+                'vpc': 'VPC',
+                'asg_with_ec2': 'ASG with EC2',
+            };
+            let displayName = resourceNames[resource] || resource;
+            
+            // Show notification below the resource button
+            const notifyDiv = document.getElementById('notify-' + resource);
+            if (notifyDiv) {
+                notifyDiv.style.display = 'block';
+                notifyDiv.className = 'notify';
+                notifyDiv.innerHTML = `
+                    <div class="output-header">
+                        <strong>Resetting ${displayName} state...</strong>
+                    </div>
+                    <pre>Removing Terraform state files...</pre>
+                `;
+            }
+            
+            // Send request to reset resource state
+            fetch('/reset_resource/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: `resource=${resource}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    if (notifyDiv) {
+                        notifyDiv.className = 'notify success';
+                        notifyDiv.innerHTML = `
+                            <div class="output-header">
+                                <strong>Resource state reset successful</strong>
+                                <span>Resource: ${displayName}</span>
+                            </div>
+                            <pre>The following files were deleted:\n${data.deleted_files.join('\n')}\n\nYou can now create or destroy this resource again.</pre>
+                        `;
+                        
+                        // Re-enable buttons
+                        document.getElementById('create-' + resource).disabled = false;
+                        document.getElementById('destroy-' + resource).disabled = false;
+                    }
+                } else {
+                    if (notifyDiv) {
+                        notifyDiv.className = 'notify error';
+                        notifyDiv.innerHTML = `
+                            <div class="output-header">
+                                <strong>Error: ${data.message}</strong>
+                                <span>Resource: ${displayName}</span>
+                            </div>
+                            <pre>Failed to reset resource state. Please try again.</pre>
+                        `;
+                    }
+                }
+            })
+            .catch(error => {
+                if (notifyDiv) {
+                    notifyDiv.className = 'notify error';
+                    notifyDiv.innerHTML = `
+                        <div class="output-header">
+                            <strong>Error: Network Error</strong>
+                            <span>Resource: ${displayName}</span>
+                        </div>
+                        <pre>${error.message}</pre>
+                    `;
+                }
+            });
+        }
+        
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
